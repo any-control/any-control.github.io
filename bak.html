@@ -1,0 +1,105 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AnyControl</title>
+<link href="./files/style.css" rel="stylesheet">
+<link href="./files/slider.css" rel="stylesheet">
+
+<script type="text/javascript" src="./files/jquery.mlens-1.0.min.js"></script> 
+<script type="text/javascript" src="./files/jquery.js"></script>
+<script src="./files/util.js" content="text/javascript"></script>
+<!-- <script src="util.js" content="text/javascript"></script> -->
+</head>
+
+<body>
+<div class="content">
+  <h1><strong>AnyControl: Create Your Artwork with Versatile Control on Text-to-Image Generation</strong></h1>
+  <p id="authors"><a href="https://scholar.google.com/citations?user=6TA1oPkAAAAJ&hl=en">Yanan Sun</a	><sup>1</sup> Yanchen Liu<sup>1,2</sup> Yinhao Tang<sup>1</sup> <a href="">Wenjie Pei</a><sup>2</sup> <a href="https://chenkai.site/">Kai Chen</a><sup>1</sup><br>
+    <br>
+  <span style="font-size: 18px"><sup>1</sup>Shanghai AI Laboratory &nbsp;&nbsp;&nbsp;&nbsp; <sup>2</sup>Harbin Institute of Technology, Shenzhen 
+  </span></p>
+  <div style="text-align: center;">
+    <img class="teaser" src="./assets/teaser.jpg" style="width:100%;">
+  </div>
+  <h3 style="text-align:center"><em>Let us create your artworks under <span style="color:rgb(253, 60, 94);">versatile control</span> in <span style="color:rgb(241, 73, 177);">any free combination</span>.</em></h3>    <font size="+2">
+          <p style="text-align: center;">
+            <a href="TODO" target="_blank">[Paper]</a> &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="TODO" target="_blank">[Code]</a> &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="TODO" target="_blank">[Demo]</a> &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="TODO" target="_blank">[Model Card]</a> &nbsp;&nbsp;&nbsp;&nbsp;
+	    <!-- (<font color="#C70039">new!</font>) <a href="https://github.com/TencentARC/PhotoMaker" target="_blank">[Dataset]</a> &nbsp;&nbsp;&nbsp;&nbsp; -->
+            <a href="TODO" target="_blank">[BibTeX]</a>
+          </p>
+    </font>
+    <p style="text-align: center;"> 
+      <!-- We are currently organizing the code and demo to ensure that everyone can enjoy the wonderful journey that PhotoMaker may bring as soon as possible.
+      If you want to support and cheer for us, please star our project. ^_^ -->
+    </p>
+  </div>
+
+</div>
+
+<div class="content">
+  <h2 style="text-align:center;">Abstract</h2>
+  <p>The field of text-to-image (T2I) generation has made significant progress in recent years, thanks to diffusion models. Linguistic control enables effective content creation, but is defective in fine-grained control over image generation. This challenge has been solved in great extent by incorporating additional user-supplied spatial conditions like depth map, edge map into pre-trained T2I model via extra encoding. However, multi-control image synthesis still struggle with input flexibility, handling the relationship among spatial conditions, 
+and maintaining compatibility with text inputs. To address these challenges, we propose <strong>AnyControl</strong>, a controllable image synthesis framework that supports any combination of various forms of control signals. AnyControl develops a novel Multi-Control Encoder to extract a unified multi-modal embedding for diverse control signals used for guiding the generation process. We achieve this by employing alternate multi-control encoding scheme and multi-control alignment scheme, with learnable queries as a bridge to unite them seamlessly and gradually distill compatible information from spatial conditions guided by textual prompts. This approach enables holistic understanding of user inputs, and produces harmonious results in high quality and fidelity under versatile control signals, demonstrated by extensive quantitative and qualitative results. 
+</p>
+
+</div>
+<!-- <div class="content">
+  <h2>Background</h2>
+  <p> Given a particular subject such as clock (shown in the real images on the left), it is very challenging to generate it in different contexts with state-of-the-art text-to-image models, while maintaining high fidelity to its key visual features. Even with dozens of iterations over a text prompt that contains a detailed description of the appearance of the clock (<em>"retro style yellow alarm clock with a white clock face and a yellow number three on the right part of the clock face in the jungle"</em>), the Imagen model [Saharia et al., 2022] can't reconstruct its key visual features (third column). Furthermore, even models whose text embedding lies in a shared language-vision space and can create semantic variations of the image, such as DALL-E2 [Ramesh et al., 2022], can neither reconstruct the appearance of the given subject nor modify the context (second column). In contrast, our approach (right) can synthesize the clock with high fidelity and in new contexts (<em>"a [V] clock in the jungle"</em>).</p>
+  <br>
+  <img class="summary-img" src="./assets/background.png" style="width:100%;"> <br>
+</div> -->
+<div class="content">
+  <h2 style="text-align:center;">Method</h2>
+  <p> AnyControl supports free combination of versatile control signals, which develops a Multi-Control Encoder that enables holistic understanding of multi-modal user inputs. We achieve this through employing alternating multi-control encoding and alignment schemes united by a set of learnable queries. 
+  <br>
+  <img class="summary-img" src="./assets/framework.jpg" style="width:80%;"> <br>
+  <p>We first send all spatial control signals into the <strong>Multi-Control Encoder</strong> for extracting comprehensive multi-control embeddings based on the textual prompts and multiple spatial conditions. The multi-control embeddings are then utilized to guide the generation process. The  Multi-Control Encoder is driven by alternate multi-control encoding and alignment schemes, with learnable queries defined to distill the compatible information from the patch-wise token embeddings of the spatial conditions as well as textual prompts.</p>
+  <br>
+</div>
+<div class="content">
+<h2 style="text-align:center;">Latest Examples</h2>
+<h3>Comparisons with state-of-the-art methods</h3>
+  <div class="realContainer">
+    <div class="realResult"><img class="resultImage" src="./assets/results/main_results.jpg"></div>
+  </div>
+</div>
+<div>
+<h3>Varied-number and varied-type of input spatial conditions</h3>
+  <div class="artContainer">
+    <div class="artResult"><img class="resultImage" src="./assets/results/many_conditions_results.jpg"></div>
+  </div>
+</div>
+<div>
+<h3>AnyControl with style and color controls</h3>
+  <div class="artContainer">
+    <div class="artResult"><img class="resultImage" src="./assets/results/style_color_results.jpg"></div>
+  </div>
+</div>
+
+<div class="content">
+  <h2>BibTex</h2>
+  <code> @misc{sun2024anycontrol,<br>
+  &nbsp;&nbsp;title={AnyControl: Create Your Artwork with Versatile Control on Text-to-Image Generation},<br>
+  &nbsp;&nbsp;author={Sun, Yanan and Liu, Yanchen and Tang, Yinhao and Pei, Wenjie and Chen, Kai},<br>
+  &nbsp;&nbsp;year={2024}<br>
+  } </code> 
+</div>
+<div class="content" id="acknowledgements">
+  <p>
+    <!-- <strong>Acknowledgements</strong>: -->
+    <!-- If you want an image removed from this page or have other requests, please contact us at <a href="mailto:zhenli1031@gmail.com">zhenli1031@gmail.com</a>. -->
+    <!-- <br> -->
+    Our project page is borrowed from <a href="https://photo-maker.github.io/">PhotoMaker</a>.
+    <!-- Recycling a familiar <a href="https://chail.github.io/latent-composition/">template</a> ;). --> 
+  </p>
+</div>
+<script content="text/javascript">initArtSelection(); </script>
+<script content="text/javascript">initRealSelection(); </script>
+
+</body>
+</html>
