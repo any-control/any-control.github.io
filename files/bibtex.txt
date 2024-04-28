@@ -1,0 +1,5 @@
+@misc{sun2024anycontrol,
+  title={AnyControl: Create Your Artwork with Versatile Control on Text-to-Image Generation},
+  author={Sun, Yanan and Liu, Yanchen and Tang, Yinhao and Pei, Wenjie and Chen, Kai},
+  year={2024}
+}
