@@ -14,8 +14,9 @@
 
 <body>
 <div class="content">
-  <h1><strong>AnyControl: Create Your Artwork with Versatile Control on Text-to-Image Generation</strong></h1>
-  <p id="authors"><a href="https://scholar.google.com/citations?user=6TA1oPkAAAAJ&hl=en">Yanan Sun</a	><sup>1</sup> Yanchen Liu<sup>1,2</sup> Yinhao Tang<sup>1</sup> <a href="">Wenjie Pei</a><sup>2</sup> <a href="https://chenkai.site/">Kai Chen</a><sup>1</sup><br>
+  <h1><strong>AnyControl: Create Your Artwork with Versatile Control</strong></h1>
+  <h1><strong>on Text-to-Image Generation</strong></h1>
+  <p id="authors"><a href="https://scholar.google.com/citations?user=6TA1oPkAAAAJ&hl=en">Yanan Sun</a><sup>1</sup>&nbsp;Yanchen Liu<sup>1,2</sup>&nbsp;Yinhao Tang<sup>1</sup>&nbsp;<a href="">Wenjie Pei</a><sup>2</sup>&nbsp;<a href="https://chenkai.site/">Kai Chen</a><sup>1</sup><br>
     <br>
   <span style="font-size: 18px"><sup>1</sup>Shanghai AI Laboratory &nbsp;&nbsp;&nbsp;&nbsp; <sup>2</sup>Harbin Institute of Technology, Shenzhen 
   </span></p>
@@ -25,8 +26,7 @@
   <h3 style="text-align:center"><em>Let us create your artworks under <span style="color:rgb(253, 60, 94);">versatile control</span> in <span style="color:rgb(241, 73, 177);">any free combination</span>.</em></h3>    <font size="+2">
           <p style="text-align: center;">
             <a href="TODO" target="_blank">[Paper]</a> &nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="TODO" target="_blank">[Code]</a> &nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="TODO" target="_blank">[Demo]</a> &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="TODO" target="https://github.com/nowsyn/AnyControl">[Code]</a> &nbsp;&nbsp;&nbsp;&nbsp;
             <a href="TODO" target="_blank">[Model Card]</a> &nbsp;&nbsp;&nbsp;&nbsp;
 	    <!-- (<font color="#C70039">new!</font>) <a href="https://github.com/TencentARC/PhotoMaker" target="_blank">[Dataset]</a> &nbsp;&nbsp;&nbsp;&nbsp; -->
             <a href="files/bibtex.txt" target="_blank">[BibTeX]</a>
@@ -42,23 +42,17 @@
 
 <div class="content">
   <h2 style="text-align:center;">Abstract</h2>
-  <p>The field of text-to-image (T2I) generation has made significant progress in recent years, thanks to diffusion models. Linguistic control enables effective content creation, but is defective in fine-grained control over image generation. This challenge has been solved in great extent by incorporating additional user-supplied spatial conditions like depth map, edge map into pre-trained T2I model via extra encoding. However, multi-control image synthesis still struggle with input flexibility, handling the relationship among spatial conditions, 
-and maintaining compatibility with text inputs. To address these challenges, we propose <strong>AnyControl</strong>, a controllable image synthesis framework that supports any combination of various forms of control signals. AnyControl develops a novel Multi-Control Encoder to extract a unified multi-modal embedding for diverse control signals used for guiding the generation process. We achieve this by employing alternate multi-control encoding scheme and multi-control alignment scheme, with learnable queries as a bridge to unite them seamlessly and gradually distill compatible information from spatial conditions guided by textual prompts. This approach enables holistic understanding of user inputs, and produces harmonious results in high quality and fidelity under versatile control signals, demonstrated by extensive quantitative and qualitative results. 
+  <p>
+The field of text-to-image (T2I) generation has made significant progress in recent years, largely driven by advancements in diffusion models. Linguistic control enables effective content creation, but struggles with fine-grained control over image generation. This challenge has been explored, to a great extent, by incorporating additional user-supplied spatial conditions, such as depth maps and edge maps, into pre-trained T2I models through extra encoding. However, multi-control image synthesis still faces several challenges. Specifically, current approaches are limited in handling free combinations of diverse input control signals, overlook the complex relationships among multiple spatial conditions, and often fail to maintain semantic alignment with provided textual prompts. This can lead to suboptimal user experiences. To address these challenges, we propose <strong>AnyControl</strong>, a multi-control image synthesis framework that supports arbitrary combinations of diverse control signals. AnyControl develops a novel Multi-Control Encoder that extracts a unified multi-modal embedding to guide the generation process. This approach enables a holistic understanding of user inputs, and produces high-quality, faithful results under versatile control signals, as demonstrated by extensive quantitative and qualitative evaluations.
 </p>
 
 </div>
-<!-- <div class="content">
-  <h2>Background</h2>
-  <p> Given a particular subject such as clock (shown in the real images on the left), it is very challenging to generate it in different contexts with state-of-the-art text-to-image models, while maintaining high fidelity to its key visual features. Even with dozens of iterations over a text prompt that contains a detailed description of the appearance of the clock (<em>"retro style yellow alarm clock with a white clock face and a yellow number three on the right part of the clock face in the jungle"</em>), the Imagen model [Saharia et al., 2022] can't reconstruct its key visual features (third column). Furthermore, even models whose text embedding lies in a shared language-vision space and can create semantic variations of the image, such as DALL-E2 [Ramesh et al., 2022], can neither reconstruct the appearance of the given subject nor modify the context (second column). In contrast, our approach (right) can synthesize the clock with high fidelity and in new contexts (<em>"a [V] clock in the jungle"</em>).</p>
-  <br>
-  <img class="summary-img" src="./assets/background.png" style="width:100%;"> <br>
-</div> -->
 <div class="content">
   <h2 style="text-align:center;">Method</h2>
-  <p> AnyControl supports free combination of versatile control signals, which develops a Multi-Control Encoder that enables holistic understanding of multi-modal user inputs. We achieve this through employing alternating multi-control encoding and alignment schemes united by a set of learnable queries. 
+  <p> AnyControl supports free combination of versatile control signals, which develops a Multi-Control Encoder that enables holistic understanding of multi-modal user inputs. We achieve this through employing alternating multi-control fusion and alignment blocks united by a set of query tokens. 
   <br>
   <img class="summary-img" src="./assets/framework.jpg" style="width:95%;"> <br>
-  <p>We first send all spatial control signals into the <strong>Multi-Control Encoder</strong> for extracting comprehensive multi-control embeddings based on the textual prompts and multiple spatial conditions. The multi-control embeddings are then utilized to guide the generation process. The  Multi-Control Encoder is driven by alternate multi-control encoding and alignment schemes, with learnable queries defined to distill the compatible information from the patch-wise token embeddings of the spatial conditions as well as textual prompts.</p>
+  <p>We first send all spatial control signals into the <strong>Multi-Control Encoder</strong> for extracting comprehensive multi-control embeddings according to textual prompts. The multi-control embeddings are then utilized to guide the generation process. The  Multi-Control Encoder is driven by alternate multi-control fusion and alignment blocks, with query tokens  defined to aggregate the compatible information from textual tokens as well as the visual tokens of the spatial conditions.</p>
   <br>
 </div>
 <div class="content">
